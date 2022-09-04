@@ -1,0 +1,144 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0B2434;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main {
+  width: 320px;
+  height: 320px;
+
+  background: #F5F5F5;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reset-button {
+  background: #5035FF;
+  box-shadow: 0px 3.2px 7.68px rgba(0, 0, 0, 0.18);
+  border-radius: 3.81277px;
+  padding: 5px 21px;
+
+  font-family: 'Karla';
+  font-weight: 700;
+  font-size: 16.384px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #FFFFFF;
+  margin-top: 25px;
+}
+
+.dice-container {
+  display: grid;
+  grid: 40px 40px / 1fr 1fr 1fr 1fr 1fr;
+  gap: 15px;
+  font-family: 'Karla', sans-serif;
+  line-height: 24px;
+  text-align: center;
+  font-weight: 700;
+  color: #2B283A;
+  margin-top: 23px;
+}
+
+.dice {
+  background: #FFFFFF;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 3.81277px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.dice > span {
+  display: grid;
+  grid-template-areas:
+        "a . c"
+        "e g f"
+        "d . b";
+  cursor: pointer;
+  font-size: 18px;
+  width: 30px;
+  margin-top: 2px;
+  flex: 0 0 auto;
+  padding: 5px;
+}
+
+.dot {
+  display: block;
+	align-self: center;
+	justify-self: center;
+	width: 7px;
+	height: 7px;  
+	border-radius: 50%;
+	background-color: #333;
+}
+
+.dot:nth-child(2) {
+	grid-area: b;
+}
+.dot:nth-child(3) {
+	grid-area: c;
+}
+.dot:nth-child(4) {
+	grid-area: d;
+}
+.dot:nth-child(5) {
+	grid-area: e;
+}
+.dot:nth-child(6) {
+	grid-area: f;
+}
+
+.dot:nth-child(odd):last-child {
+	grid-area: g;
+}
+
+.held {
+  background: #59E391;
+}
+
+main > h1 {
+  margin-bottom: 0px;
+
+  font-family: 'Karla';
+  font-weight: 700;
+  font-size: 25.6px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.03em;
+
+  color: #2B283A;
+  margin-top: 28px;
+}
+
+main > p {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13.1072px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.03em;
+
+  color: #4A4E74;
+  width: 232px;
+  margin-top: 0px;
+}
