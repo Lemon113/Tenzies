@@ -1,14 +1,15 @@
-import Dice from "./Dice"
-import React from "react"
+import Dice from './Dice'
+import React from 'react'
 import { nanoid } from "nanoid"
 import Confetti from "react-confetti"
+import DiceData from "./DiceData"
 
 function Main() {
     const [dices, setDices] = React.useState(() => generateNewField())
     const [tenzies, setTenzies] = React.useState(false)
     const [rolls, setRolls] = React.useState(0)
     const [startDate, setStartDate] = React.useState(new Date())
-    const [bestTime, setBestime] = React.useState(() => JSON.parse(localStorage.getItem("tenzies_best_time")) || 0);
+    const [bestTime, setBestime] = React.useState(() => JSON.parse(localStorage.getItem("tenzies_best_time")!) || 0);
     const [confettiWidth, setConfettiWidth] = React.useState(window.innerWidth);
 
     const setWindowDimensions = () => {
@@ -28,7 +29,7 @@ function Main() {
         }
     }, [])
 
-    var dicesElements = dices.map(d => <Dice key={d.id} value={d.value} isHeld={d.isHeld} handleClick={() => toggleHeld(d.id)}/>)
+    var dicesElements = dices.map(d => <Dice id={d.id} key={d.id} value={d.value} isHeld={d.isHeld} clickHandler={() => toggleHeld(d.id)}/>)
 
     React.useEffect(() => {
         const dice = dices[0]
@@ -38,7 +39,8 @@ function Main() {
         if (isHeld && isEquals) {
             setTenzies(true)
             console.log(`Won in ${rolls} rolls!` )
-            const time = new Date() - startDate
+            const date = new Date();
+            const time = date.getTime() - startDate.getTime();
             const userTimezoneOffset = new Date().getTimezoneOffset() * 60000;
             const dateTime = new Date(time + userTimezoneOffset)
             console.log(`Your time ${dateTime.toLocaleTimeString()}`)
@@ -48,7 +50,7 @@ function Main() {
         }
     }, [dices])
 
-    function toggleHeld(id) {
+    function toggleHeld(id: string) {
         setDices(prevDices => prevDices.map(d => {
             if (d.id === id) {
                 return {
@@ -61,12 +63,13 @@ function Main() {
         }))
     }
 
-    function generateNewField() {
-        return Array(10).fill().map(() => {
+    function generateNewField(): Array<DiceData> {
+        return Array(10).fill(10).map(() => {
             return {
-                isHeld: false,
                 value: Math.ceil(Math.random() * 6),
-                id: nanoid()
+                isHeld: false,
+                id: nanoid(),
+                clickHandler: () => {}
             }
         })
     }
