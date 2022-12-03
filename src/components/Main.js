@@ -9,12 +9,24 @@ function Main() {
     const [rolls, setRolls] = React.useState(0)
     const [startDate, setStartDate] = React.useState(new Date())
     const [bestTime, setBestime] = React.useState(() => JSON.parse(localStorage.getItem("tenzies_best_time")) || 0);
+    const [confettiWidth, setConfettiWidth] = React.useState(window.innerWidth);
+
+    const setWindowDimensions = () => {
+        setConfettiWidth(window.innerWidth);
+    }
 
     React.useEffect(() => {
         const userTimezoneOffset = new Date().getTimezoneOffset() * 60000;
         console.log(bestTime !== 0 ? `Your best time is: ${new Date(bestTime + userTimezoneOffset).toLocaleTimeString()}` : "You didn't beat game yet")
         localStorage.setItem("tenzies_best_time", JSON.stringify(bestTime))
     }, [bestTime])
+
+    React.useEffect(() => {
+        window.addEventListener('resize', setWindowDimensions);
+        return () => {
+            window.removeEventListener('resize', setWindowDimensions);
+        }
+    }, [])
 
     var dicesElements = dices.map(d => <Dice key={d.id} value={d.value} isHeld={d.isHeld} handleClick={() => toggleHeld(d.id)}/>)
 
@@ -87,7 +99,9 @@ function Main() {
                 {dicesElements}
             </div>
             <button className="reset-button" onClick={tenzies ? newGame : reroll}>{tenzies ? "New Game" : "Roll"}</button>
-            {tenzies && <Confetti/>}
+            {tenzies && <Confetti
+                width={confettiWidth}
+            />}
         </main>
     )
 }
