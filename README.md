@@ -8,6 +8,7 @@ Roll dices untill they are the same. Click each die to freeze it at its current 
 
 In the project directory, you can run:
 
+### `npm install`
 ### `npm start`
 
 Runs the app in the development mode.\
